@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build"
+  command = "npx prisma generate && npm run build"
   publish = ".next"
 
 # Netlify installiert @netlify/plugin-nextjs automatisch für Next-Projekte.
@@ -11,8 +11,10 @@
 # Node-Version, die Netlify verwendet (Prisma & sharp brauchen >=18.17).
 [build.environment]
   NODE_VERSION = "20"
-  # Prisma generiert die passenden Binaries beim `npm ci` via postinstall.
+  # Prisma-Client MUSS Library-Engine nutzen (kein Data-Proxy),
+  # weil wir eine echte postgresql://-URL zu Neon verwenden.
   PRISMA_GENERATE_DATAPROXY = "false"
+  PRISMA_CLIENT_ENGINE_TYPE = "library"
 
 # Prisma-Engine-Binary ins Serverless-Function-Bundle mitpacken,
 # sonst fällt Prisma auf den Data-Proxy-Modus zurück und erwartet prisma://-URL.
