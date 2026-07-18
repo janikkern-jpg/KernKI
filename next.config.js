@@ -3,6 +3,12 @@ const { PrismaPlugin } = require("@prisma/nextjs-monorepo-workaround-plugin");
 
 const nextConfig = {
   reactStrictMode: true,
+  // Prisma NICHT ins Next-Server-Bundle einbauen — sonst verliert Netlify die
+  // Engine-Binary. Stattdessen bleibt es ein normaler require() aus
+  // node_modules zur Laufzeit.
+  experimental: {
+    serverComponentsExternalPackages: ["@prisma/client", "prisma"],
+  },
   webpack: (config, { isServer }) => {
     if (isServer) {
       config.plugins = [...(config.plugins || []), new PrismaPlugin()];
