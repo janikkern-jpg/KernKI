@@ -13,3 +13,12 @@
   NODE_VERSION = "20"
   # Prisma generiert die passenden Binaries beim `npm ci` via postinstall.
   PRISMA_GENERATE_DATAPROXY = "false"
+
+# Prisma-Engine-Binary ins Serverless-Function-Bundle mitpacken,
+# sonst fällt Prisma auf den Data-Proxy-Modus zurück und erwartet prisma://-URL.
+[functions]
+  included_files = [
+    "node_modules/.prisma/client/**",
+    "node_modules/@prisma/client/**",
+    "prisma/schema.prisma"
+  ]
