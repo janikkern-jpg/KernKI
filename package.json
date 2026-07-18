@@ -19,6 +19,7 @@
     "@anthropic-ai/sdk": "^0.112.3",
     "@prisma/client": "^5.19.1",
     "highlight.js": "^11.11.1",
+    "jose": "^6.2.3",
     "next": "14.2.35",
     "next-pwa": "^5.6.0",
     "openai": "^6.48.0",

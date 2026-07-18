@@ -239,13 +239,23 @@ export function Sidebar() {
       </div>
 
       {/* 5. Nav */}
-      <div className="border-t border-white/5 px-3 py-2 text-xs">
+      <div className="flex items-center justify-between gap-2 border-t border-white/5 px-3 py-2 text-xs">
         <Link
           href="/settings"
           className="rounded px-2 py-1 text-neutral-300 hover:bg-white/5"
         >
           Einstellungen
         </Link>
+        <button
+          type="button"
+          onClick={async () => {
+            await fetch("/api/logout", { method: "POST" });
+            window.location.href = "/login";
+          }}
+          className="rounded px-2 py-1 text-neutral-400 hover:bg-white/5"
+        >
+          Abmelden
+        </button>
       </div>
     </aside>
   );
